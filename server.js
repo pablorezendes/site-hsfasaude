@@ -26,7 +26,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://cdnjs.cloudflare.com", "https://www.google.com", "https://www.gstatic.com", "https://www.googletagmanager.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://www.google.com", "https://www.gstatic.com", "https://www.googletagmanager.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net"],
       imgSrc: ["'self'", "data:", "blob:", "https://www.gstatic.com", "https://www.google-analytics.com", "https://*.google-analytics.com"],
