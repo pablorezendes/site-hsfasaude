@@ -1,0 +1,10 @@
+# Esta pasta deve conter as imagens dos exames
+# Estrutura esperada:
+# - tc.jpg (Tomografia Computadorizada)
+# - angio.jpg (Angiotomografia das Coronárias)
+# - rm.jpg (Ressonância Magnética)
+# - ecocardio.jpg (Ecocardiograma)
+# - ultrassom_geral.jpg (Ultrassom Geral)
+# - densitometria.jpg (Densitometria Óssea)
+
+
