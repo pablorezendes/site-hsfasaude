@@ -1,0 +1,144 @@
+/* Estilos específicos para a página de Exames */
+
+.exame-card {
+  background: var(--surface-container-lowest, #ffffff);
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  border: 1px solid var(--outline-variant, #bec8c9);
+  border-left: 3px solid transparent;
+  transition: transform var(--transition-normal, 0.3s) ease,
+              box-shadow var(--transition-normal, 0.3s) ease,
+              border-color var(--transition-normal, 0.3s) ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.exame-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg, 0 12px 32px rgba(25, 111, 117, 0.12));
+  border-left: 3px solid var(--primary, #196F75);
+  border-color: var(--primary-light, #88d3d9);
+}
+
+.exame-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.exame-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: var(--surface, #f8fafa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exame-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--transition-slow, 0.5s) ease;
+  background: var(--surface, #f8fafa);
+}
+
+.exame-card:hover .exame-image {
+  transform: scale(1.06);
+}
+
+.exame-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(25, 111, 117, 0.85) 0%,
+    rgba(0, 86, 91, 0.75) 50%,
+    rgba(136, 211, 217, 0.7) 100%
+  );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal, 0.3s) ease;
+}
+
+.exame-card:hover .exame-overlay {
+  opacity: 1;
+}
+
+.exame-overlay-content {
+  color: white;
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform var(--transition-normal, 0.3s) ease;
+}
+
+.exame-card:hover .exame-overlay-content {
+  transform: translateY(0);
+}
+
+.exame-info {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--surface-container-lowest, #ffffff);
+}
+
+.exame-title {
+  color: var(--on-surface, #191c1d);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  transition: color var(--transition-normal, 0.3s) ease;
+}
+
+.exame-card:hover .exame-title {
+  color: var(--primary, #196F75);
+}
+
+.exame-arrow {
+  color: var(--primary, #196F75);
+  font-size: 1.2rem;
+  transition: transform var(--transition-normal, 0.3s) ease;
+  margin-top: 0.5rem;
+}
+
+.exame-card:hover .exame-arrow {
+  transform: translateX(5px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .exame-info {
+    padding: 1.25rem;
+  }
+
+  .exame-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .exame-info {
+    padding: 1rem;
+  }
+}
+
+/* Loading state */
+.spinner-border {
+  border-color: var(--primary, #196F75);
+  border-right-color: transparent;
+}

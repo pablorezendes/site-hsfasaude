@@ -1,0 +1,152 @@
+/* Estilos para botões seguindo a cor verde do site (#196F75) */
+
+/* Botão Primary - Verde do site */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary, #196F75), var(--primary-dark, #00565b)) !important;
+  border-color: var(--primary, #196F75) !important;
+  color: #fff !important;
+  padding: 0.5rem 1.25rem !important;
+  letter-spacing: 0.02em;
+  transition: background var(--transition-fast, 0.2s) ease,
+              box-shadow var(--transition-fast, 0.2s) ease,
+              transform var(--transition-fast, 0.2s) ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background: linear-gradient(135deg, var(--primary-light, #88d3d9), var(--primary, #196F75)) !important;
+  border-color: var(--primary, #196F75) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(25, 111, 117, 0.35) !important;
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--primary-light, #88d3d9);
+  outline-offset: 3px;
+}
+
+.btn-primary:disabled {
+  background: linear-gradient(135deg, var(--primary, #196F75), var(--primary-dark, #00565b)) !important;
+  border-color: var(--primary, #196F75) !important;
+  opacity: 0.6;
+  box-shadow: none !important;
+}
+
+/* Botão Outline Primary */
+.btn-outline-primary {
+  color: var(--primary, #196F75) !important;
+  border-color: var(--primary, #196F75) !important;
+  background-color: transparent !important;
+  padding: 0.5rem 1.25rem !important;
+  letter-spacing: 0.02em;
+  transition: background-color var(--transition-fast, 0.2s) ease,
+              color var(--transition-fast, 0.2s) ease,
+              border-color var(--transition-fast, 0.2s) ease,
+              box-shadow var(--transition-fast, 0.2s) ease;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active {
+  background-color: var(--primary, #196F75) !important;
+  border-color: var(--primary, #196F75) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(25, 111, 117, 0.2) !important;
+}
+
+.btn-outline-primary:focus-visible {
+  outline: 2px solid var(--primary-light, #88d3d9);
+  outline-offset: 3px;
+}
+
+/* Botão Success - também usar verde */
+.btn-success {
+  background: linear-gradient(135deg, var(--primary, #196F75), var(--primary-dark, #00565b)) !important;
+  border-color: var(--primary, #196F75) !important;
+  color: #fff !important;
+  padding: 0.5rem 1.25rem !important;
+  letter-spacing: 0.02em;
+  transition: background var(--transition-fast, 0.2s) ease,
+              box-shadow var(--transition-fast, 0.2s) ease;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active {
+  background: linear-gradient(135deg, var(--primary-light, #88d3d9), var(--primary, #196F75)) !important;
+  border-color: var(--tertiary, #155a60) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(25, 111, 117, 0.35) !important;
+}
+
+.btn-success:focus-visible {
+  outline: 2px solid var(--primary-light, #88d3d9);
+  outline-offset: 3px;
+}
+
+/* Background Primary para elementos com bg-primary */
+.bg-primary {
+  background-color: var(--primary, #196F75) !important;
+}
+
+/* Text Primary */
+.text-primary {
+  color: var(--primary, #196F75) !important;
+}
+
+/* Back to Top button */
+.back-to-top {
+  background-color: var(--primary, #196F75) !important;
+  border-color: var(--primary, #196F75) !important;
+  transition: background-color var(--transition-fast, 0.2s) ease,
+              box-shadow var(--transition-fast, 0.2s) ease;
+}
+
+.back-to-top:hover {
+  background-color: var(--primary-dark, #00565b) !important;
+  border-color: var(--primary-dark, #00565b) !important;
+  box-shadow: 0 4px 12px rgba(25, 111, 117, 0.3) !important;
+}
+
+/* Carousel controls com cor primária */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(25, 111, 117, 0.5) !important;
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  background-color: rgba(25, 111, 117, 0.8) !important;
+}
+
+/* Links com cor primária */
+a.text-primary,
+a.text-primary:hover {
+  color: var(--primary, #196F75) !important;
+}
+
+/* Page Header background */
+.page-header {
+  background: linear-gradient(rgba(25, 111, 117, 0.9), rgba(25, 111, 117, 0.9)), url(/img/carousel-1.jpg) center center no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-header > * {
+  position: relative;
+  z-index: 1;
+}

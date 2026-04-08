@@ -1,0 +1,217 @@
+/* Estilos para a página de Editais */
+
+.edital-card {
+  background: var(--surface-container-lowest, #ffffff);
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.06));
+  transition: transform var(--transition-normal, 0.3s) cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow var(--transition-normal, 0.3s) cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  border-left: 3px solid var(--primary, #196F75);
+}
+
+.edital-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg, 0 10px 30px rgba(25, 111, 117, 0.12));
+}
+
+.edital-content {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.edital-icon-wrapper {
+  flex-shrink: 0;
+}
+
+.edital-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md, 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  transition: transform var(--transition-normal, 0.3s) cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow var(--transition-normal, 0.3s) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pdf-icon {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+}
+
+.image-icon {
+  background: linear-gradient(135deg, var(--primary, #196F75) 0%, var(--primary-dark, #00565b) 100%);
+  color: white;
+}
+
+.edital-card:hover .edital-icon {
+  transform: scale(1.08);
+  box-shadow: 0 0 16px rgba(25, 111, 117, 0.25);
+}
+
+.edital-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.edital-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.edital-title {
+  color: var(--on-surface, #191c1d);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  min-width: 200px;
+}
+
+.edital-periodo {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-light, #88d3d9);
+  color: var(--primary-dark, #00565b);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.edital-descricao {
+  color: var(--on-surface-variant, #3f4949);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.edital-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.edital-cnpj,
+.edital-tipo {
+  display: inline-flex;
+  align-items: center;
+  color: var(--on-surface-variant, #3f4949);
+  font-size: 0.9rem;
+}
+
+.edital-cnpj i,
+.edital-tipo i {
+  color: var(--primary, #196F75);
+}
+
+.edital-action {
+  flex-shrink: 0;
+}
+
+.btn-edital {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary, #196F75) 0%, var(--primary-dark, #00565b) 100%);
+  color: white;
+  border-radius: var(--radius-sm, 8px);
+  text-decoration: none;
+  font-weight: 500;
+  transition: transform var(--transition-fast, 0.2s) cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow var(--transition-fast, 0.2s) cubic-bezier(0.4, 0, 0.2, 1),
+              filter var(--transition-fast, 0.2s) ease;
+  white-space: nowrap;
+}
+
+.btn-edital:hover {
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md, 0 4px 12px rgba(25, 111, 117, 0.3));
+  filter: brightness(1.08);
+}
+
+.btn-edital i {
+  font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 991px) {
+  .edital-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .edital-icon-wrapper {
+    align-self: center;
+  }
+
+  .edital-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .edital-action {
+    width: 100%;
+  }
+
+  .btn-edital {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .edital-content {
+    padding: 1.5rem;
+  }
+
+  .edital-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+  }
+
+  .edital-title {
+    font-size: 1.1rem;
+  }
+
+  .edital-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .edital-content {
+    padding: 1.25rem;
+  }
+
+  .edital-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.75rem;
+  }
+
+  .edital-title {
+    font-size: 1rem;
+  }
+
+  .edital-descricao {
+    font-size: 0.9rem;
+  }
+}

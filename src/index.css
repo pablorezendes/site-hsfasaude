@@ -1,0 +1,128 @@
+/* ========== HSFA Saúde - Global Design System ========== */
+/* "The Clinical Sanctuary" - Premium Healthcare Aesthetic */
+
+/* Import design system tokens */
+@import url('./styles/index.css');
+
+/* ========== BASE RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--on-surface, #191c1d);
+  background: var(--surface, #f8fafa);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ========== TYPOGRAPHY ENHANCEMENTS ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--on-surface, #191c1d);
+}
+
+p {
+  color: var(--on-surface-variant, #3f4949);
+  line-height: 1.7;
+}
+
+/* ========== LINK STYLES ========== */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: rgba(25, 111, 117, 0.12);
+  color: var(--primary-dark, #00565b);
+}
+
+/* ========== SPINNER ========== */
+#spinner {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s ease-out, visibility 0s linear .5s;
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--surface, #f8fafa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#spinner.show {
+  transition: opacity .5s ease-out, visibility 0s linear 0s;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-container-low, #f2f4f4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant, #bec8c9);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline, #6f797a);
+}
+
+/* ========== FOCUS STATES (Accessibility) ========== */
+:focus-visible {
+  outline: 2px solid var(--primary, #196F75);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ========== GLOBAL ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== IMAGE GLOBAL ========== */
+img {
+  max-width: 100%;
+  height: auto;
+}

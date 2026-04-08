@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Carimbo com Assinatura Digital</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .container {
+            background: white;
+            max-width: 100%;
+            width: 100%;
+            padding: 15px 8px;
+            margin: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            line-height: 1.3;
+            padding: 0 5px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-section, .preview-section {
+            background: #f8f9fa;
+            padding: 15px 8px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        input:disabled,
+        select:disabled {
+            background-color: #f0f0f0;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .signature-section {
+            background: #f8f9fa;
+            padding: 15px 8px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .canvas-container {
+            background: white;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        canvas {
+            display: block;
+            cursor: crosshair;
+            touch-action: none;
+            max-width: 100%;
+        }
+
+        .canvas-placeholder {
+            position: absolute;
+            color: #adb5bd;
+            font-size: 1.1em;
+            pointer-events: none;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .canvas-placeholder {
+                font-size: 0.95em;
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 48px;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        #previewCanvas {
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            max-width: 100%;
+            width: 400px;
+            height: auto;
+            max-height: 500px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            background: 
+                linear-gradient(45deg, #f8f8f8 25%, transparent 25%),
+                linear-gradient(-45deg, #f8f8f8 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f8f8f8 75%),
+                linear-gradient(-45deg, transparent 75%, #f8f8f8 75%);
+            background-size: 15px 15px;
+            background-position: 0 0, 0 7.5px, 7.5px -7.5px, -7.5px 0px;
+        }
+
+        .preview-container {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .color-picker-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-option.active {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+        }
+
+        .pen-width-group {
+            margin-bottom: 15px;
+        }
+
+        .pen-width-group input[type="range"] {
+            width: 100%;
+        }
+
+        .pen-width-display {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+  @media (max-width: 768px) {
+            html, body {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            /* Reordenar elementos no mobile: form, signature, preview */
+            .form-section {
+                order: 1;
+            }
+
+            .preview-section {
+                order: 3;
+            }
+
+            .signature-section {
+                order: 2;
+            }
+
+            .container {
+                padding: 8px 4px;
+                border-radius: 0;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.25em;
+                margin-bottom: 12px;
+                padding: 0 4px;
+            }
+
+            .section-title {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+
+            .form-section, .preview-section, .signature-section {
+                padding: 10px 6px;
+                border-radius: 6px;
+                margin: 0 0 8px 0;
+                width: 100%;
+            }
+
+            .canvas-container {
+                margin: 8px auto;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            canvas#signatureCanvas {
+                width: 100% !important;
+                height: 140px !important;
+            }
+
+            #previewCanvas {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                max-height: 400px;
+            }
+
+            .preview-container {
+                min-height: 250px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 12px 16px;
+                width: 100%;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 8px;
+                margin: 0;
+                width: 100%;
+            }
+
+            .color-picker-group {
+                flex-wrap: wrap;
+                margin: 0;
+                width: 100%;
+            }
+
+            .color-option {
+                width: 44px;
+                height: 44px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            select {
+                font-size: 16px;
+                width: 100%;
+            }
+
+            .canvas-placeholder {
+                font-size: 0.85em;
+                padding: 8px 4px;
+            }
+
+            .pen-width-group {
+                margin-bottom: 8px;
+                width: 100%;
+            }
+
+            .pen-width-group input[type="range"] {
+                height: 40px;
+                width: 100%;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+                width: 100%;
+            }
+        }
+
+        /* Melhorias adicionais para mobile pequeno */
+        @media (max-width: 480px) {
+            html, body {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+            }
+
+            .container {
+                padding: 6px 2px;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.15em;
+                padding: 0 2px;
+                margin-bottom: 10px;
+            }
+
+            .section-title {
+                font-size: 0.95em;
+                margin-bottom: 6px;
+            }
+
+            button {
+                font-size: 13px;
+                padding: 11px 12px;
+            }
+
+            .form-section, .preview-section, .signature-section {
+                padding: 8px 4px;
+                margin: 0 0 6px 0;
+            }
+
+            .button-group {
+                margin: 0;
+                gap: 6px;
+            }
+
+            .main-content {
+                gap: 6px;
+            }
+
+            canvas#signatureCanvas {
+                height: 120px !important;
+            }
+        }
+
+        /* Prevenir zoom no iOS em inputs */
+        @media screen and (max-width: 768px) {
+            input[type="text"],
+            input[type="date"],
+            select,
+            textarea {
+                font-size: 16px !important;
+            }
+        }
+
+        /* Melhorar área de toque */
+        .color-option {
+            -webkit-tap-highlight-color: rgba(102, 126, 234, 0.3);
+            tap-highlight-color: rgba(102, 126, 234, 0.3);
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+            tap-highlight-color: transparent;
+        }
+
+        /* Loading spinner para mobile */
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Smooth scroll em mobile */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+  }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖋️ Sistema de Carimbo com Assinatura Digital</h1>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2 class="section-title">📝 Dados do Carimbo</h2>
+                
+                <div class="form-group">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" placeholder="Ex: joão silva" onblur="capitalizarNome()">
+      </div>
+
+                <div class="form-group">
+                    <label for="cargo">Cargo/Função:</label>
+                    <input type="text" id="cargo" placeholder="Ex: Médico">
+      </div>
+
+                <div class="form-group">
+                    <label for="empresa">Empresa/Instituição:</label>
+                    <input type="text" id="empresa" value="Hospital São Francisco de Assis" placeholder="Hospital São Francisco de Assis">
+    </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="semRegistro" onchange="toggleRegistro()">
+                    <label for="semRegistro">Não possuo registro profissional</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoRegistro">Tipo de Registro Profissional: <span style="color: red;" id="asteriscoRegistro">*</span></label>
+                    <select id="tipoRegistro" onchange="atualizarRegistro()" required>
+                        <option value="">Selecione o tipo de registro</option>
+                        <optgroup label="Médicos">
+                            <option value="CRM">CRM - Médico</option>
+                            <option value="CRM-V">CRM-V - Médico Veterinário</option>
+                        </optgroup>
+                        <optgroup label="Enfermagem">
+                            <option value="COREN">COREN - Enfermeiro(a)</option>
+                            <option value="COREN-T">COREN-T - Técnico em Enfermagem</option>
+                            <option value="COREN-A">COREN-A - Auxiliar de Enfermagem</option>
+                        </optgroup>
+                        <optgroup label="Laboratório e Diagnóstico">
+                            <option value="CRBM">CRBM - Biomédico(a)</option>
+                            <option value="CRQ">CRQ - Químico(a)</option>
+                            <option value="CRF">CRF - Farmacêutico(a)</option>
+                            <option value="CRBio">CRBio - Biólogo(a)</option>
+                        </optgroup>
+                        <optgroup label="Nutrição">
+                            <option value="CRN">CRN - Nutricionista</option>
+                        </optgroup>
+                        <optgroup label="Psicologia e Saúde Mental">
+                            <option value="CRP">CRP - Psicólogo(a)</option>
+                            <option value="CREFONO">CREFONO - Fonoaudiólogo(a)</option>
+                            <option value="CREFITO">CREFITO - Fisioterapeuta</option>
+                            <option value="CREFITO-TO">CREFITO-TO - Terapeuta Ocupacional</option>
+                        </optgroup>
+                        <optgroup label="Odontologia">
+                            <option value="CRO">CRO - Cirurgião-Dentista</option>
+                            <option value="CRO-T">CRO-T - Técnico em Saúde Bucal</option>
+                            <option value="CRO-A">CRO-A - Auxiliar em Saúde Bucal</option>
+                        </optgroup>
+                        <optgroup label="Educação Física">
+                            <option value="CREF">CREF - Educador Físico</option>
+                        </optgroup>
+                        <optgroup label="Engenharia">
+                            <option value="CREA">CREA - Engenheiro Clínico</option>
+                            <option value="CREA">CREA - Engenheiro Biomédico</option>
+                            <option value="CREA">CREA - Engenheiro Civil</option>
+                            <option value="CREA">CREA - Engenheiro Eletricista</option>
+                            <option value="CREA">CREA - Engenheiro Mecânico</option>
+                            <option value="CREA">CREA - Engenheiro de Segurança do Trabalho</option>
+                        </optgroup>
+                        <optgroup label="Radiologia e Imagem">
+                            <option value="CRTR">CRTR - Técnico em Radiologia</option>
+                        </optgroup>
+                        <optgroup label="Assistência Social">
+                            <option value="CRESS">CRESS - Assistente Social</option>
+                        </optgroup>
+                        <optgroup label="Outros">
+                            <option value="CRA">CRA - Administrador</option>
+                            <option value="CRC">CRC - Contador</option>
+                            <option value="OAB">OAB - Advogado</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group" id="numRegistroGroup">
+                    <label for="numRegistro">Número do Registro: <span style="color: red;" id="asteriscoNumero">*</span></label>
+                    <input type="text" id="numRegistro" placeholder="Ex: 12345" onblur="atualizarRegistro()" required>
+                    <small style="color: #666; font-size: 0.85em;">Digite apenas o número</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="estadoRegistro">Estado (UF): <span style="color: red;" id="asteriscoEstado">*</span></label>
+                    <select id="estadoRegistro" onchange="atualizarRegistro()" required>
+                        <option value="">Selecione o estado</option>
+                        <option value="AC">Acre (AC)</option>
+                        <option value="AL">Alagoas (AL)</option>
+                        <option value="AP">Amapá (AP)</option>
+                        <option value="AM">Amazonas (AM)</option>
+                        <option value="BA">Bahia (BA)</option>
+                        <option value="CE">Ceará (CE)</option>
+                        <option value="DF">Distrito Federal (DF)</option>
+                        <option value="ES">Espírito Santo (ES)</option>
+                        <option value="GO" selected>Goiás (GO)</option>
+                        <option value="MA">Maranhão (MA)</option>
+                        <option value="MT">Mato Grosso (MT)</option>
+                        <option value="MS">Mato Grosso do Sul (MS)</option>
+                        <option value="MG">Minas Gerais (MG)</option>
+                        <option value="PA">Pará (PA)</option>
+                        <option value="PB">Paraíba (PB)</option>
+                        <option value="PR">Paraná (PR)</option>
+                        <option value="PE">Pernambuco (PE)</option>
+                        <option value="PI">Piauí (PI)</option>
+                        <option value="RJ">Rio de Janeiro (RJ)</option>
+                        <option value="RN">Rio Grande do Norte (RN)</option>
+                        <option value="RS">Rio Grande do Sul (RS)</option>
+                        <option value="RO">Rondônia (RO)</option>
+                        <option value="RR">Roraima (RR)</option>
+                        <option value="SC">Santa Catarina (SC)</option>
+                        <option value="SP">São Paulo (SP)</option>
+                        <option value="SE">Sergipe (SE)</option>
+                        <option value="TO">Tocantins (TO)</option>
+                    </select>
+                </div>
+
+                <input type="hidden" id="registro">
+    </div>
+
+            <div class="preview-section">
+                <h2 class="section-title">👁️ Pré-visualização</h2>
+                <div class="preview-container">
+                    <canvas id="previewCanvas" width="400" height="500"></canvas>
+      </div>
+      </div>
+    </div>
+
+        <div class="signature-section">
+            <h2 class="section-title">✍️ Área de Assinatura</h2>
+            
+            <div class="color-picker-group">
+                <label>Cor da Caneta:</label>
+                <div class="color-option active" data-color="#000080" style="background: #000080;" title="Azul Caneta"></div>
+                <div class="color-option" data-color="#0000FF" style="background: #0000FF;" title="Azul"></div>
+                <div class="color-option" data-color="#000000" style="background: #000000;" title="Preto"></div>
+            </div>
+
+            <div class="pen-width-group">
+                <label>Espessura da Caneta: <span class="pen-width-display">2px</span></label>
+                <input type="range" id="penWidth" min="1" max="5" value="2">
+    </div>
+
+            <div class="canvas-container">
+                <canvas id="signatureCanvas" width="600" height="150"></canvas>
+                <div class="canvas-placeholder" id="canvasPlaceholder">
+                    ✍️ Assine aqui<br>
+                    <small style="font-size: 0.8em;">Desenhe sua assinatura</small>
+      </div>
+    </div>
+
+            <div class="button-group">
+                <button class="btn-danger" onclick="clearSignature()">
+                    🗑️ Limpar Assinatura
+                </button>
+                <button class="btn-secondary" onclick="undoSignature()">
+                    ↩️ Desfazer
+                </button>
+      </div>
+    </div>
+
+        <div class="button-group" style="justify-content: center;">
+            <button class="btn-primary" onclick="updatePreview()">
+                🔄 Atualizar Pré-visualização
+            </button>
+            <button class="btn-success" id="btnSalvar" onclick="salvarNoServidor()">
+                💾 SALVAR ASSINATURA E ENVIAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Configuração do canvas de assinatura
+        const signatureCanvas = document.getElementById('signatureCanvas');
+        const signatureCtx = signatureCanvas.getContext('2d');
+        const placeholder = document.getElementById('canvasPlaceholder');
+        
+        let isDrawing = false;
+        let currentColor = '#000080';
+        let currentWidth = 2;
+        let signatureStrokes = [];
+        let currentStroke = [];
+        let hasSignature = false;
+
+        // Detectar se é dispositivo móvel
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // Ajustar canvas para mobile
+        function ajustarCanvasParaMobile() {
+            if (isMobile) {
+                const container = signatureCanvas.parentElement;
+                const containerWidth = container.clientWidth - 20;
+                signatureCanvas.width = Math.min(containerWidth, 600);
+                signatureCanvas.height = 140;
+                
+                // Aumentar espessura padrão no mobile
+                currentWidth = 3;
+                document.getElementById('penWidth').value = 3;
+                document.querySelector('.pen-width-display').textContent = '3px';
+            }
+        }
+
+        // Chamar ajuste ao carregar
+        window.addEventListener('load', ajustarCanvasParaMobile);
+        window.addEventListener('resize', ajustarCanvasParaMobile);
+
+        // Função para capitalizar nome (primeira letra de cada palavra maiúscula)
+        function capitalizarNome() {
+            const nomeInput = document.getElementById('nome');
+            const nome = nomeInput.value;
+            
+            if (nome) {
+                const palavras = nome.toLowerCase().split(' ');
+                const nomeCapitalizado = palavras.map(palavra => {
+                    if (palavra.length > 0) {
+                        return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+                    }
+                    return palavra;
+                }).join(' ');
+                
+                nomeInput.value = nomeCapitalizado;
+            }
+        }
+
+        // Função para toggle do campo de registro
+        function toggleRegistro() {
+            const semRegistro = document.getElementById('semRegistro').checked;
+            const tipoRegistro = document.getElementById('tipoRegistro');
+            const numRegistro = document.getElementById('numRegistro');
+            const estadoRegistro = document.getElementById('estadoRegistro');
+            
+            if (semRegistro) {
+                // Desabilitar campos
+                tipoRegistro.disabled = true;
+                numRegistro.disabled = true;
+                estadoRegistro.disabled = true;
+                
+                // Remover obrigatoriedade
+                tipoRegistro.removeAttribute('required');
+                numRegistro.removeAttribute('required');
+                estadoRegistro.removeAttribute('required');
+                
+                // Ocultar asteriscos
+                document.getElementById('asteriscoRegistro').style.display = 'none';
+                document.getElementById('asteriscoNumero').style.display = 'none';
+                document.getElementById('asteriscoEstado').style.display = 'none';
+                
+                // Limpar valores
+                tipoRegistro.value = '';
+                numRegistro.value = '';
+                estadoRegistro.value = '';
+                
+            } else {
+                // Habilitar campos
+                tipoRegistro.disabled = false;
+                numRegistro.disabled = false;
+                estadoRegistro.disabled = false;
+                
+                // Adicionar obrigatoriedade
+                tipoRegistro.setAttribute('required', 'required');
+                numRegistro.setAttribute('required', 'required');
+                estadoRegistro.setAttribute('required', 'required');
+                
+                // Mostrar asteriscos
+                document.getElementById('asteriscoRegistro').style.display = 'inline';
+                document.getElementById('asteriscoNumero').style.display = 'inline';
+                document.getElementById('asteriscoEstado').style.display = 'inline';
+                
+                // Restaurar valor padrão do estado
+                estadoRegistro.value = 'GO';
+            }
+            
+            // Atualizar registro
+            atualizarRegistro();
+        }
+
+        // Função para atualizar o campo de registro completo
+        function atualizarRegistro() {
+            const semRegistro = document.getElementById('semRegistro').checked;
+            const tipoRegistro = document.getElementById('tipoRegistro').value;
+            const numRegistro = document.getElementById('numRegistro').value;
+            const estadoRegistro = document.getElementById('estadoRegistro').value;
+            const registroHidden = document.getElementById('registro');
+            
+            // Se não tem registro, deixar vazio
+            if (semRegistro) {
+                registroHidden.value = '';
+            } else {
+                // Montar registro completo
+                if (tipoRegistro && numRegistro && estadoRegistro) {
+                    registroHidden.value = `${tipoRegistro} ${numRegistro}/${estadoRegistro}`;
+                } else {
+                    registroHidden.value = '';
+                }
+            }
+            
+            // Atualizar preview automaticamente (isso NÃO afeta o canvas de assinatura)
+            updatePreview();
+        }
+
+        // Configurar data atual removida - campo de data foi removido
+
+        // Configuração da cor da caneta
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                currentColor = this.dataset.color;
+            });
+        });
+
+        // Configuração da espessura da caneta
+        document.getElementById('penWidth').addEventListener('input', function() {
+            currentWidth = parseInt(this.value);
+            document.querySelector('.pen-width-display').textContent = currentWidth + 'px';
+        });
+
+        // Funções de desenho
+        function startDrawing(e) {
+            e.preventDefault();
+            isDrawing = true;
+            hasSignature = true;
+            placeholder.style.display = 'none';
+            
+            const rect = signatureCanvas.getBoundingClientRect();
+            const scaleX = signatureCanvas.width / rect.width;
+            const scaleY = signatureCanvas.height / rect.height;
+            
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
+            
+            currentStroke = [{x, y, color: currentColor, width: currentWidth}];
+            
+            signatureCtx.beginPath();
+            signatureCtx.moveTo(x, y);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            e.preventDefault();
+            
+            const rect = signatureCanvas.getBoundingClientRect();
+            const scaleX = signatureCanvas.width / rect.width;
+            const scaleY = signatureCanvas.height / rect.height;
+            
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
+            
+            currentStroke.push({x, y, color: currentColor, width: currentWidth});
+            
+            signatureCtx.strokeStyle = currentColor;
+            signatureCtx.lineWidth = currentWidth;
+            signatureCtx.lineCap = 'round';
+            signatureCtx.lineJoin = 'round';
+            
+            signatureCtx.lineTo(x, y);
+            signatureCtx.stroke();
+        }
+
+        function stopDrawing(e) {
+            if (isDrawing && currentStroke.length > 0) {
+                signatureStrokes.push([...currentStroke]);
+            }
+            isDrawing = false;
+            currentStroke = [];
+        }
+
+        // Event listeners para mouse
+        signatureCanvas.addEventListener('mousedown', startDrawing, { passive: false });
+        signatureCanvas.addEventListener('mousemove', draw, { passive: false });
+        signatureCanvas.addEventListener('mouseup', stopDrawing, { passive: false });
+        signatureCanvas.addEventListener('mouseout', stopDrawing, { passive: false });
+
+        // Event listeners para touch (com passive: false para prevenir scroll)
+        signatureCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+        signatureCanvas.addEventListener('touchmove', draw, { passive: false });
+        signatureCanvas.addEventListener('touchend', stopDrawing, { passive: false });
+        signatureCanvas.addEventListener('touchcancel', stopDrawing, { passive: false });
+
+        // Função para limpar assinatura
+        function clearSignature() {
+            if (!hasSignature) {
+                if (isMobile) {
+                    alert('ℹ️ A área de assinatura já está limpa!');
+                }
+                return;
+            }
+            
+            if (isMobile) {
+                // Feedback visual no mobile
+                const confirmacao = confirm('🗑️ Deseja limpar a assinatura?');
+                if (!confirmacao) return;
+            }
+            
+            signatureCtx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            signatureStrokes = [];
+            hasSignature = false;
+            placeholder.style.display = 'block';
+            
+            if (isMobile) {
+                // Vibração tátil (se disponível)
+                if (navigator.vibrate) {
+                    navigator.vibrate(100);
+                }
+            }
+        }
+
+        // Função para desfazer última ação
+        function undoSignature() {
+            if (signatureStrokes.length === 0) {
+                if (isMobile) {
+                    alert('ℹ️ Não há nada para desfazer!');
+                }
+                return;
+            }
+            
+            signatureStrokes.pop();
+            signatureCtx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            
+            signatureStrokes.forEach(stroke => {
+                if (stroke.length === 0) return;
+                
+                signatureCtx.beginPath();
+                signatureCtx.moveTo(stroke[0].x, stroke[0].y);
+                
+                stroke.forEach((point, index) => {
+                    if (index === 0) return;
+                    signatureCtx.strokeStyle = point.color;
+                    signatureCtx.lineWidth = point.width;
+                    signatureCtx.lineCap = 'round';
+                    signatureCtx.lineJoin = 'round';
+                    signatureCtx.lineTo(point.x, point.y);
+                    signatureCtx.stroke();
+                });
+            });
+
+            if (signatureStrokes.length === 0) {
+                hasSignature = false;
+                placeholder.style.display = 'block';
+            }
+            
+            // Vibração tátil no mobile
+            if (isMobile && navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        // Função para atualizar pré-visualização
+        function updatePreview() {
+            const previewCanvas = document.getElementById('previewCanvas');
+            if (!previewCanvas) return; // Proteção contra elementos não encontrados
+            
+            const ctx = previewCanvas.getContext('2d');
+            
+            const nome = document.getElementById('nome').value;
+            const cargo = document.getElementById('cargo').value;
+            const empresa = document.getElementById('empresa').value;
+            const registro = document.getElementById('registro').value;
+            
+            // Limpar canvas de preview (NÃO limpa o canvas de assinatura)
+            ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+            
+            // Verificar se o canvas de assinatura ainda existe e tem conteúdo
+            if (signatureCanvas && signatureCtx) {
+                const imageData = signatureCtx.getImageData(0, 0, signatureCanvas.width, signatureCanvas.height);
+                const hasContent = imageData.data.some((channel, index) => {
+                    return index % 4 !== 3 && channel !== 0;
+                });
+                
+                // Sincronizar hasSignature com o estado real
+                if (hasContent && !hasSignature) {
+                    hasSignature = true;
+                    if (placeholder) placeholder.style.display = 'none';
+                } else if (!hasContent && hasSignature) {
+                    hasSignature = false;
+                    if (placeholder) placeholder.style.display = 'block';
+                }
+            }
+            
+            // Desenhar carimbo retangular (padrão)
+            desenharCarimboRetangular(ctx, nome, cargo, empresa, registro, false);
+        }
+
+        function desenharCarimboRetangular(ctx, nome, cargo, empresa, registro, incluirBorda, centerX = 200) {
+            let yPos = 30;
+            
+            // Adicionar assinatura no topo (se existir)
+            if (hasSignature) {
+                const scale = 0.5;
+                const scaledWidth = signatureCanvas.width * scale;
+                const offsetX = centerX - (scaledWidth / 2);
+                
+                ctx.save();
+                ctx.translate(offsetX, yPos);
+                ctx.scale(scale, scale);
+                ctx.drawImage(signatureCanvas, 0, 0);
+                ctx.restore();
+                
+                yPos += (signatureCanvas.height * scale) + 15; // Espaço após assinatura
+            }
+            
+            // Texto sem bordas
+            ctx.fillStyle = '#000';
+            ctx.textAlign = 'center';
+            
+            if (nome) {
+                ctx.font = 'bold 18px Arial';
+                ctx.fillText(nome, centerX, yPos);
+                yPos += 23; // 18px (tamanho fonte) + 5px (espaçamento)
+            }
+            
+            if (cargo) {
+                ctx.font = '16px Arial';
+                ctx.fillText(cargo, centerX, yPos);
+                yPos += 21; // 16px + 5px
+            }
+            
+            if (empresa) {
+                ctx.font = '16px Arial';
+                ctx.fillText(empresa, centerX, yPos);
+                yPos += 21; // 16px + 5px
+            }
+            
+            if (registro) {
+                ctx.font = '16px Arial';
+                ctx.fillText(registro, centerX, yPos);
+                yPos += 21; // 16px + 5px
+            }
+            
+            return yPos + 20; // Retorna altura total necessária
+        }
+
+        function desenharCarimboCircular(ctx, nome, cargo, empresa, registro, incluirBorda, centerX = 200) {
+            let yPos = 30;
+            
+            // Adicionar assinatura no topo (se existir)
+            if (hasSignature) {
+                const scale = 0.5;
+                const scaledWidth = signatureCanvas.width * scale;
+                const offsetX = centerX - (scaledWidth / 2);
+                
+                ctx.save();
+                ctx.translate(offsetX, yPos);
+                ctx.scale(scale, scale);
+                ctx.drawImage(signatureCanvas, 0, 0);
+                ctx.restore();
+                
+                yPos += (signatureCanvas.height * scale) + 15; // Espaço após assinatura
+            }
+            
+            // Texto sem bordas
+            ctx.fillStyle = '#000';
+            ctx.textAlign = 'center';
+            
+            if (nome) {
+                ctx.font = 'bold 18px Arial';
+                ctx.fillText(nome, centerX, yPos);
+                yPos += 23; // 18px (tamanho fonte) + 5px (espaçamento)
+            }
+            
+            if (cargo) {
+                ctx.font = '16px Arial';
+                ctx.fillText(cargo, centerX, yPos);
+                yPos += 21; // 16px + 5px
+            }
+            
+            if (empresa) {
+                ctx.font = '16px Arial';
+                ctx.fillText(empresa, centerX, yPos);
+                yPos += 21; // 16px + 5px
+            }
+            
+            if (registro) {
+                ctx.font = '16px Arial';
+                ctx.fillText(registro, centerX, yPos);
+                yPos += 21; // 16px + 5px
+            }
+            
+            return yPos + 20; // Retorna altura total necessária
+        }
+
+        function desenharTextoCurvado(ctx, texto, centerX, centerY, radius, startAngle, invertido) {
+            ctx.save();
+            const anglePerChar = Math.PI / (texto.length + 1);
+            
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            for (let i = 0; i < texto.length; i++) {
+                const angle = startAngle + (i + 1) * anglePerChar;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(angle + Math.PI / 2);
+                if (invertido) ctx.rotate(Math.PI);
+                ctx.fillText(texto[i], 0, 0);
+                ctx.restore();
+            }
+            
+            ctx.restore();
+        }
+
+        // Função para calcular largura necessária do texto
+        function calcularLarguraMaxima(nome, cargo, empresa, registro) {
+            const tempCanvas = document.createElement('canvas');
+            const ctx = tempCanvas.getContext('2d');
+            let maxWidth = 0;
+            
+            if (nome) {
+                ctx.font = 'bold 18px Arial';
+                maxWidth = Math.max(maxWidth, ctx.measureText(nome).width);
+            }
+            
+            if (cargo) {
+                ctx.font = '16px Arial';
+                maxWidth = Math.max(maxWidth, ctx.measureText(cargo).width);
+            }
+            
+            if (empresa) {
+                ctx.font = '16px Arial';
+                maxWidth = Math.max(maxWidth, ctx.measureText(empresa).width);
+            }
+            
+            if (registro) {
+                ctx.font = '16px Arial';
+                maxWidth = Math.max(maxWidth, ctx.measureText(registro).width);
+            }
+            
+            // Considerar largura da assinatura
+            if (hasSignature) {
+                const signatureWidth = signatureCanvas.width * 0.5;
+                maxWidth = Math.max(maxWidth, signatureWidth);
+            }
+            
+            return maxWidth + 60; // Adiciona margem lateral
+        }
+
+        // Função para salvar no servidor
+        async function salvarNoServidor() {
+            // Verificação robusta: checar se o canvas tem conteúdo real
+            const imageData = signatureCtx.getImageData(0, 0, signatureCanvas.width, signatureCanvas.height);
+            const hasContent = imageData.data.some((channel, index) => {
+                return index % 4 !== 3 && channel !== 0; // Verifica se há pixels não-transparentes
+            });
+            
+            // Garantir que hasSignature está sincronizado com o estado real do canvas
+            if (hasContent && !hasSignature) {
+                hasSignature = true;
+                if (placeholder) placeholder.style.display = 'none';
+            }
+            
+            if (!hasSignature && !hasContent) {
+                alert('⚠️ Por favor, adicione uma assinatura antes de salvar!');
+                // Scroll suave até a área de assinatura no mobile
+                if (isMobile) {
+                    document.getElementById('signatureCanvas').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }
+                return;
+            }
+            
+            const nome = document.getElementById('nome').value;
+            const cargo = document.getElementById('cargo').value;
+            const empresa = document.getElementById('empresa').value;
+            const semRegistro = document.getElementById('semRegistro').checked;
+            const tipoRegistro = document.getElementById('tipoRegistro').value;
+            const numRegistro = document.getElementById('numRegistro').value;
+            const estadoRegistro = document.getElementById('estadoRegistro').value;
+            const registro = document.getElementById('registro').value;
+            
+            // Validar nome obrigatório
+            if (!nome || nome.trim() === '') {
+                alert('⚠️ O campo Nome é obrigatório!');
+                document.getElementById('nome').focus();
+                
+                // Scroll suave até o campo no mobile
+                if (isMobile) {
+                    document.getElementById('nome').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }
+                return;
+            }
+
+            // Validar campos de registro apenas se não marcou "sem registro"
+            if (!semRegistro) {
+                // Validar tipo de registro obrigatório
+                if (!tipoRegistro || tipoRegistro === '') {
+                    alert('⚠️ O campo Tipo de Registro Profissional é obrigatório!');
+                    document.getElementById('tipoRegistro').focus();
+                    
+                    if (isMobile) {
+                        document.getElementById('tipoRegistro').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }
+                    return;
+                }
+
+                // Validar número de registro obrigatório
+                if (!numRegistro || numRegistro.trim() === '') {
+                    alert('⚠️ O campo Número do Registro é obrigatório!');
+                    document.getElementById('numRegistro').focus();
+                    
+                    if (isMobile) {
+                        document.getElementById('numRegistro').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }
+                    return;
+                }
+
+                // Validar estado obrigatório
+                if (!estadoRegistro || estadoRegistro === '') {
+                    alert('⚠️ O campo Estado (UF) é obrigatório!');
+                    document.getElementById('estadoRegistro').focus();
+                    
+                    if (isMobile) {
+                        document.getElementById('estadoRegistro').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }
+                    return;
+                }
+            }
+            
+            // Calcular dimensões necessárias
+            const largura = calcularLarguraMaxima(nome, cargo, empresa, registro);
+            
+            // Criar canvas temporário para calcular altura
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = largura;
+            tempCanvas.height = 600;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            // Desenhar para obter altura real (formato retangular padrão)
+            let altura = desenharCarimboRetangular(tempCtx, nome, cargo, empresa, registro, false, largura / 2);
+            
+            // Criar canvas final com tamanho correto
+            const finalCanvas = document.createElement('canvas');
+            finalCanvas.width = largura;
+            finalCanvas.height = altura;
+            const finalCtx = finalCanvas.getContext('2d');
+            
+            // Verificar novamente se há assinatura antes de desenhar
+            const imageDataCheck = signatureCtx.getImageData(0, 0, signatureCanvas.width, signatureCanvas.height);
+            const hasContentCheck = imageDataCheck.data.some((channel, index) => {
+                return index % 4 !== 3 && channel !== 0;
+            });
+            
+            if (!hasContentCheck) {
+                alert('⚠️ A assinatura foi perdida! Por favor, adicione uma assinatura novamente antes de salvar.');
+                // Restaurar botão
+                const btnSalvar = document.getElementById('btnSalvar');
+                if (btnSalvar) {
+                    btnSalvar.disabled = false;
+                    btnSalvar.innerHTML = '💾 SALVAR ASSINATURA E ENVIAR';
+                }
+                return;
+            }
+            
+            // Desenhar carimbo final (formato retangular padrão)
+            desenharCarimboRetangular(finalCtx, nome, cargo, empresa, registro, false, largura / 2);
+            
+            // Converter canvas para base64
+            const imagemBase64 = finalCanvas.toDataURL('image/png');
+            
+            // Preparar dados para enviar
+            const dados = {
+                nome: nome,
+                cargo: cargo || '',
+                empresa: empresa || '',
+                registro: registro || '',
+                imagem: imagemBase64
+            };
+            
+            // Mostrar indicador de carregamento
+            const btnSalvar = document.getElementById('btnSalvar');
+            const textoOriginal = btnSalvar.innerHTML;
+            btnSalvar.disabled = true;
+            
+            if (isMobile) {
+                btnSalvar.innerHTML = '<span class="loading-spinner"></span> Salvando...';
+            } else {
+                btnSalvar.innerHTML = '⏳ Salvando...';
+            }
+            
+            try {
+                // Enviar para a API Node.js/Express
+                const response = await fetch('/assinaturas/api/salvar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dados)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ message: 'Erro ao processar resposta do servidor' }));
+                    throw new Error(errorData.message || 'Erro HTTP: ' + response.status);
+                }
+                
+                const resultado = await response.json();
+                
+                if (resultado.success) {
+                    // Vibração de sucesso no mobile
+                    if (isMobile && navigator.vibrate) {
+                        navigator.vibrate([100, 50, 100]);
+                    }
+                    
+                    // Mensagem adaptada para mobile
+                    if (isMobile) {
+                        alert('✅ SUCESSO!\n\n' + 
+                              'Assinatura salva!\n\n' +
+                              '📄 ' + resultado.data.arquivo_imagem + '\n' +
+                              '🕐 ' + resultado.data.data_hora);
+                    } else {
+                        alert('✅ Sucesso!\n\n' + 
+                              'Assinatura salva com sucesso no servidor!\n\n' +
+                              'Arquivo de imagem: ' + resultado.data.arquivo_imagem + '\n' +
+                              'Arquivo de dados: ' + resultado.data.arquivo_txt + '\n' +
+                              'Data/Hora: ' + resultado.data.data_hora + '\n' +
+                              'Status: ' + resultado.data.status);
+                    }
+                } else {
+                    throw new Error(resultado.message);
+                }
+                
+            } catch (error) {
+                alert('❌ Erro ao salvar no servidor!\n\n' + error.message);
+                console.error('Erro:', error);
+            } finally {
+                // Restaurar botão
+                btnSalvar.disabled = false;
+                btnSalvar.innerHTML = textoOriginal;
+            }
+        }
+
+        // Função para baixar carimbo
+        function downloadCarimbo() {
+            if (!hasSignature) {
+                alert('⚠️ Por favor, adicione uma assinatura antes de baixar o carimbo!');
+                
+                // Scroll suave até a área de assinatura no mobile
+                if (isMobile) {
+                    document.getElementById('signatureCanvas').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }
+                return;
+            }
+            
+            const nome = document.getElementById('nome').value;
+            const semRegistro = document.getElementById('semRegistro').checked;
+            const tipoRegistro = document.getElementById('tipoRegistro').value;
+            const numRegistro = document.getElementById('numRegistro').value;
+            const estadoRegistro = document.getElementById('estadoRegistro').value;
+            const cargo = document.getElementById('cargo').value;
+            const empresa = document.getElementById('empresa').value;
+            const registro = document.getElementById('registro').value;
+
+            // Validar campos obrigatórios
+            if (!nome || nome.trim() === '') {
+                alert('⚠️ O campo Nome é obrigatório!');
+                return;
+            }
+
+            // Validar campos de registro apenas se não marcou "sem registro"
+            if (!semRegistro) {
+                if (!tipoRegistro || tipoRegistro === '') {
+                    alert('⚠️ O campo Tipo de Registro Profissional é obrigatório!');
+                    return;
+                }
+
+                if (!numRegistro || numRegistro.trim() === '') {
+                    alert('⚠️ O campo Número do Registro é obrigatório!');
+                    return;
+                }
+
+                if (!estadoRegistro || estadoRegistro === '') {
+                    alert('⚠️ O campo Estado (UF) é obrigatório!');
+                    return;
+                }
+            }
+            
+            // Calcular dimensões necessárias
+            const largura = calcularLarguraMaxima(nome, cargo, empresa, registro);
+            
+            // Criar canvas temporário para calcular altura
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = largura;
+            tempCanvas.height = 600;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            // Desenhar para obter altura real (formato retangular padrão)
+            let altura = desenharCarimboRetangular(tempCtx, nome, cargo, empresa, registro, false, largura / 2);
+            
+            // Criar canvas final com tamanho correto
+            const finalCanvas = document.createElement('canvas');
+            finalCanvas.width = largura;
+            finalCanvas.height = altura;
+            const finalCtx = finalCanvas.getContext('2d');
+            
+            // Desenhar carimbo final (formato retangular padrão)
+            desenharCarimboRetangular(finalCtx, nome, cargo, empresa, registro, false, largura / 2);
+            
+            // Download
+            const link = document.createElement('a');
+            const timestamp = new Date().getTime();
+            link.download = `carimbo_${nome.replace(/\s+/g, '_')}_${timestamp}.png`;
+            link.href = finalCanvas.toDataURL('image/png');
+            link.click();
+            
+            // Feedback de sucesso no mobile
+            if (isMobile) {
+                // Vibração de sucesso
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
+                
+                // Mensagem de sucesso
+                setTimeout(() => {
+                    alert('📥 Download iniciado!\n\nVerifique sua pasta de downloads.');
+                }, 100);
+            }
+        }
+
+        // Atualizar pré-visualização automaticamente quando houver mudanças
+        document.querySelectorAll('input:not(#tipoRegistro):not(#numRegistro):not(#estadoRegistro), select:not(#tipoRegistro):not(#estadoRegistro)').forEach(element => {
+            element.addEventListener('input', updatePreview);
+            element.addEventListener('change', updatePreview);
+        });
+        
+        // Listeners especiais para campos de registro
+        document.getElementById('tipoRegistro').addEventListener('change', atualizarRegistro);
+        document.getElementById('numRegistro').addEventListener('input', atualizarRegistro);
+        document.getElementById('estadoRegistro').addEventListener('change', atualizarRegistro);
+
+        // Inicializar pré-visualização
+        updatePreview();
+</script>
+</body>
+</html>

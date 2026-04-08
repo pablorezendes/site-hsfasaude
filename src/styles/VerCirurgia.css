@@ -1,0 +1,269 @@
+/* Estilos para a página de detalhes das cirurgias */
+
+.cirurgia-image-wrapper {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.cirurgia-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cirurgia-content {
+  padding: 1rem 0;
+}
+
+/* Info Cards */
+.info-card {
+  background: linear-gradient(
+    135deg,
+    var(--surface) 0%,
+    var(--surface-container-low) 100%
+  );
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  transition: box-shadow var(--transition-normal) ease;
+}
+
+.info-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.info-card-title {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  padding: 0.75rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  background-image: linear-gradient(
+    to right,
+    var(--outline-variant) 0%,
+    transparent 100%
+  );
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.info-list li:last-child {
+  background-image: none;
+}
+
+.info-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+}
+
+/* Type Cards */
+.type-card {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  height: 100%;
+  transition: border-color var(--transition-normal) ease,
+              box-shadow var(--transition-normal) ease,
+              transform var(--transition-normal) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.type-card:hover {
+  border-color: var(--primary-light);
+  box-shadow:
+    0 0 0 1px var(--primary-light),
+    0 4px 20px rgba(25, 111, 117, 0.12);
+  transform: translateY(-3px);
+}
+
+.type-card-title {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.type-card-desc {
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Advantage Items */
+.advantage-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+  transition: background-color var(--transition-normal) ease,
+              transform var(--transition-normal) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.advantage-item:hover {
+  background: color-mix(in srgb, var(--primary-light) 12%, var(--surface));
+  transform: translateX(5px);
+}
+
+.advantage-item i {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  transition: color var(--transition-fast) ease;
+}
+
+.advantage-item:hover i {
+  color: var(--primary-dark);
+}
+
+.advantage-item span {
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+/* Procedure Items */
+.procedure-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+  transition: background-color var(--transition-normal) ease,
+              transform var(--transition-normal) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.procedure-item:hover {
+  background: color-mix(in srgb, var(--primary-light) 12%, var(--surface));
+  transform: translateX(5px);
+}
+
+.procedure-item i {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  transition: color var(--transition-fast) ease;
+}
+
+.procedure-item:hover i {
+  color: var(--primary-dark);
+}
+
+.procedure-item span {
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+/* Contact Card */
+.contact-card {
+  background:
+    radial-gradient(
+      ellipse at 20% 80%,
+      rgba(136, 211, 217, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(255, 255, 255, 0.06) 0%,
+      transparent 50%
+    ),
+    linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--tertiary) 100%);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  color: white;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px, 32px 32px;
+  pointer-events: none;
+}
+
+.contact-card-title {
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  color: white;
+  font-size: 1.05rem;
+  position: relative;
+  transition: transform var(--transition-fast) ease;
+}
+
+.contact-item:hover {
+  transform: translateX(4px);
+}
+
+.contact-item i {
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  transition: transform var(--transition-fast) ease;
+}
+
+.contact-item:hover i {
+  transform: scale(1.15);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .info-card {
+    padding: 1.5rem;
+  }
+
+  .info-card-title {
+    font-size: 1.3rem;
+  }
+
+  .type-card {
+    margin-bottom: 1rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+  }
+
+  .contact-item {
+    font-size: 0.95rem;
+  }
+}

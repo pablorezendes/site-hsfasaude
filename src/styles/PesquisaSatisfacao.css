@@ -1,0 +1,154 @@
+/* Estilos específicos para a página de Pesquisa de Satisfação */
+
+.form-step {
+  transition: opacity var(--transition-normal) ease, transform var(--transition-normal) ease;
+  animation: fadeInStep 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes fadeInStep {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progress {
+  height: 10px;
+  border-radius: 6px;
+  background-color: var(--surface-container-low);
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+  box-shadow: 0 0 12px rgba(25, 111, 117, 0.35);
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 6px;
+}
+
+.rating-container {
+  padding: 10px 0;
+}
+
+.rating-container .form-range {
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.setor-item {
+  background: var(--surface-container-low);
+  padding: 15px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.setor-item:hover {
+  background: color-mix(in srgb, var(--primary-light) 18%, var(--surface));
+  box-shadow: var(--shadow-sm);
+}
+
+.setor-grupo {
+  border-left: 3px solid var(--primary);
+  padding-left: 15px;
+}
+
+.setor-grupo h5 {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.card {
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--surface-container-lowest);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal) ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  padding: 10px 30px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-success {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  padding: 10px 30px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.btn-success:hover {
+  background-color: var(--tertiary);
+  border-color: var(--tertiary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+  padding: 10px 30px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast) ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+  border-color: var(--outline-variant);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: transparent;
+  border-bottom-color: var(--primary);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  box-shadow: 0 2px 0 0 var(--primary);
+  outline: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .setor-grupo {
+    border-left: none;
+    padding-left: 0;
+    border-top: 3px solid var(--primary);
+    padding-top: 15px;
+    margin-top: 20px;
+  }
+
+  .card-body {
+    padding: 20px !important;
+  }
+}

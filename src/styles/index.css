@@ -1,0 +1,237 @@
+/* ========== HSFA Saúde - Global Design System ========== */
+/* "The Clinical Sanctuary" - Premium Healthcare Aesthetic */
+
+/* ========== CSS VARIABLES ========== */
+:root {
+  --primary: #196F75;
+  --primary-dark: #00565b;
+  --primary-light: #88d3d9;
+  --primary-container: #a4eff6;
+  --secondary: #25d366;
+  --secondary-dark: #006d2f;
+  --tertiary: #155a60;
+  --surface: #f8fafa;
+  --surface-container: #eceeee;
+  --surface-container-low: #f2f4f4;
+  --surface-container-high: #e6e8e9;
+  --surface-container-lowest: #ffffff;
+  --on-surface: #191c1d;
+  --on-surface-variant: #3f4949;
+  --outline: #6f797a;
+  --outline-variant: #bec8c9;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --shadow-sm: 0 2px 8px rgba(25, 28, 29, 0.04);
+  --shadow-md: 0 4px 16px rgba(25, 28, 29, 0.06);
+  --shadow-lg: 0 12px 32px -4px rgba(25, 28, 29, 0.08);
+  --shadow-xl: 0 20px 48px -8px rgba(25, 28, 29, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-body: 'Montserrat', sans-serif;
+  --font-heading: 'Roboto', sans-serif;
+}
+
+/* ========== BASE STYLES ========== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--on-surface);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ========== SMOOTH SCROLL ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: rgba(25, 111, 117, 0.15);
+  color: var(--primary-dark);
+}
+
+/* ========== HEADINGS ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--on-surface);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* ========== LINKS ========== */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* ========== SECTIONS ========== */
+.section-title {
+  color: var(--on-surface);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.divider-custom-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  margin: 0 auto;
+  border-radius: 2px;
+  transition: width var(--transition-normal);
+}
+
+.divider-custom:hover .divider-custom-line,
+.divider-custom-line:hover {
+  width: 80px;
+}
+
+/* ========== PAGE TRANSITIONS ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ========== SPINNER ========== */
+#spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity var(--transition-slow);
+}
+
+#spinner:not(.show) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spinner-border {
+  border-color: var(--primary);
+  border-right-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* ========== SUBTLE GLASS EFFECT ========== */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* ========== FOCUS STATES (Accessibility) ========== */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-container-low);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
+}
+
+/* ========== IMAGE UTILITIES ========== */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-hover-zoom {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.img-hover-zoom img {
+  transition: transform var(--transition-slow);
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.05);
+}
