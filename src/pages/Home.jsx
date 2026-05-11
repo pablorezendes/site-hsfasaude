@@ -263,9 +263,9 @@ function Home() {
                 <h1 className="display-6 mb-4"><i className="fas fa-book-reader me-2" style={{ color: '#196F75' }}></i>Guia do Paciente</h1>
                 <p className="mb-4">Conheça todas as informações importantes para seu atendimento no Hospital São Francisco de Assis. Nosso guia completo traz orientações sobre procedimentos, documentação necessária, horários de funcionamento e muito mais.</p>
                 <p className="mb-4">Facilitamos seu acesso às informações essenciais para garantir um atendimento ágil e eficiente. Baixe o guia e tenha todas as informações em mãos.</p>
-                <a 
-                  className="btn btn-primary rounded-pill py-3 px-5" 
-                  href="/public_html/guiaPaciente.pdf" 
+                <a
+                  className="btn btn-primary rounded-pill py-3 px-5"
+                  href="/guias/Guia-do-Paciente-HSFA-2024.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
