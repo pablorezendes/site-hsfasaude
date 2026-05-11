@@ -202,6 +202,42 @@
   transform: translateX(-50%) scaleX(1);
 }
 
+/* ----- Link destacado do Observatorio ----- */
+
+.nav-link.nav-link-observatorio {
+  display: inline-flex !important;
+  align-items: center;
+  background: linear-gradient(120deg, #196F75 0%, #0e3d42 100%) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  padding: 0.5rem 1.05rem !important;
+  margin: 0 0.25rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 6px 14px -6px rgba(25, 111, 117, 0.55);
+}
+
+.nav-link.nav-link-observatorio::after {
+  display: none;
+}
+
+.nav-link.nav-link-observatorio:hover {
+  transform: translateY(-2px);
+  color: #fff !important;
+  background: linear-gradient(120deg, #1f8a91 0%, #196F75 100%) !important;
+  box-shadow: 0 12px 24px -6px rgba(25, 111, 117, 0.7);
+}
+
+.nav-badge {
+  background: #FFD60A;
+  color: #0e3d42;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  margin-left: 0.5rem;
+  letter-spacing: 0.03em;
+}
+
 .navbar-toggler {
   border: 2px solid var(--primary);
   padding: 0.5rem 0.75rem;

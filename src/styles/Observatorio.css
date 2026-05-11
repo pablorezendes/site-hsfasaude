@@ -1,0 +1,438 @@
+/* ============================================
+   OBSERVATÓRIO HSFA 2025 — Seção destaque na Home
+   ============================================ */
+
+.observatorio-section {
+  position: relative;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #0e3d42 0%, #196F75 45%, #1f8a91 100%);
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.observatorio-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.06) 0%, transparent 45%),
+    repeating-linear-gradient(45deg, transparent 0, transparent 25px, rgba(255, 255, 255, 0.025) 25px, rgba(255, 255, 255, 0.025) 26px);
+  pointer-events: none;
+}
+
+.observatorio-content {
+  color: #fff;
+  position: relative;
+}
+
+.observatorio-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(6px);
+  margin-bottom: 1.5rem;
+}
+
+.observatorio-pulse {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #FFD60A;
+  box-shadow: 0 0 0 0 rgba(255, 214, 10, 0.7);
+  animation: observatorio-pulse 1.8s infinite;
+  margin-right: 0.4rem;
+}
+
+@keyframes observatorio-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 214, 10, 0.7); }
+  70% { box-shadow: 0 0 0 14px rgba(255, 214, 10, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 214, 10, 0); }
+}
+
+.observatorio-title {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+}
+
+.observatorio-title-accent {
+  background: linear-gradient(120deg, #FFD60A 0%, #FFB400 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.observatorio-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.observatorio-description {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  margin-bottom: 2.2rem;
+  max-width: 520px;
+}
+
+.observatorio-description strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.observatorio-cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.observatorio-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  color: #0e3d42;
+  padding: 1rem 2.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  width: fit-content;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+.observatorio-cta-primary:hover {
+  transform: translateY(-2px);
+  background: #FFD60A;
+  color: #0e3d42;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.4);
+}
+
+.observatorio-cta-hint {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin-left: 0.4rem;
+}
+
+/* ----- Card Mockup ----- */
+
+.observatorio-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
+  transition: transform 0.5s ease;
+}
+
+.observatorio-card:hover {
+  transform: perspective(1400px) rotateY(-2deg) rotateX(0deg);
+}
+
+.observatorio-card-header {
+  background: #f3f5f7;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #e5e9ec;
+}
+
+.observatorio-card-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.observatorio-card-dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.observatorio-card-dots span:nth-child(1) { background: #ff5f57; }
+.observatorio-card-dots span:nth-child(2) { background: #ffbd2e; }
+.observatorio-card-dots span:nth-child(3) { background: #28c940; }
+
+.observatorio-card-url {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #e5e9ec;
+  border-radius: 6px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.78rem;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.observatorio-card-url i {
+  color: #28a745;
+  font-size: 0.7rem;
+}
+
+.observatorio-card-body {
+  padding: 2rem;
+}
+
+.observatorio-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px dashed #e5e9ec;
+}
+
+.observatorio-hero-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #196F75 0%, #0e3d42 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  min-width: 110px;
+  line-height: 1;
+  box-shadow: 0 12px 24px -10px rgba(25, 111, 117, 0.6);
+}
+
+.observatorio-counter {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.observatorio-hero-number small {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-top: 0.25rem;
+  opacity: 0.85;
+}
+
+.observatorio-hero-text {
+  color: #1C2035;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.observatorio-hero-text strong {
+  color: #196F75;
+}
+
+.observatorio-hero-period {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.observatorio-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.observatorio-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #f8fafb;
+  border-left: 3px solid #196F75;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+}
+
+.observatorio-stat-icon {
+  font-size: 1.3rem;
+  color: #196F75;
+  flex-shrink: 0;
+}
+
+.observatorio-stat-label {
+  font-size: 0.78rem;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.observatorio-stat-value {
+  font-size: 0.92rem;
+  color: #1C2035;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0.15rem;
+}
+
+.observatorio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding-top: 1rem;
+  border-top: 2px dashed #e5e9ec;
+}
+
+.observatorio-tags span {
+  background: #eaf3f4;
+  color: #0e3d42;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.observatorio-tags span:hover {
+  background: #196F75;
+  color: #fff;
+}
+
+/* ----- Slide do Carousel ----- */
+
+.observatorio-slide {
+  position: relative;
+  background: linear-gradient(135deg, #0e3d42 0%, #196F75 50%, #1f8a91 100%);
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.observatorio-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 25% 30%, rgba(255, 214, 10, 0.18) 0%, transparent 35%),
+    radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+    repeating-linear-gradient(45deg, transparent 0, transparent 30px, rgba(255, 255, 255, 0.03) 30px, rgba(255, 255, 255, 0.03) 31px);
+  pointer-events: none;
+}
+
+.observatorio-slide-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 214, 10, 0.95);
+  color: #0e3d42;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  font-size: 0.95rem;
+  margin-bottom: 1.4rem;
+  box-shadow: 0 10px 30px -8px rgba(255, 214, 10, 0.5);
+}
+
+.observatorio-slide-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.observatorio-slide-year {
+  background: linear-gradient(120deg, #FFD60A 0%, #FFB400 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.observatorio-slide-text {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 620px;
+}
+
+.observatorio-slide-text strong {
+  color: #FFD60A;
+}
+
+.observatorio-slide-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  color: #0e3d42;
+  padding: 1.1rem 2.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.4);
+}
+
+.observatorio-slide-btn:hover {
+  transform: translateY(-3px);
+  background: #FFD60A;
+  color: #0e3d42;
+}
+
+/* ----- Responsivo ----- */
+
+@media (max-width: 991.98px) {
+  .observatorio-section {
+    padding: 4rem 0;
+  }
+
+  .observatorio-card {
+    transform: none;
+    margin-top: 2rem;
+  }
+
+  .observatorio-card:hover {
+    transform: none;
+  }
+
+  .observatorio-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .observatorio-slide {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .observatorio-section {
+    padding: 3rem 0;
+  }
+
+  .observatorio-card-body {
+    padding: 1.25rem;
+  }
+
+  .observatorio-hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .observatorio-counter {
+    font-size: 2.6rem;
+  }
+
+  .observatorio-cta-primary {
+    width: 100%;
+    justify-content: center;
+  }
+}

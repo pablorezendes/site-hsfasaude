@@ -41,6 +41,7 @@ function Navbar() {
     { to: '/editais', label: 'Editais', icon: 'fas fa-file-alt' },
     { to: '/exames', label: 'Exames', icon: 'fas fa-microscope' },
     { to: '/cirurgias', label: 'Cirurgias', icon: 'fas fa-procedures' },
+    { to: 'https://observatorio.hsfasaude.com.br/', label: 'Observatório', icon: 'fas fa-chart-line', external: true, highlight: true },
     { to: 'https://pacs.hsfasaude.com.br/login', label: 'Resultados', icon: 'fas fa-clipboard-list', external: true },
     { to: '/contato', label: 'S.A.C', icon: 'fas fa-headset' },
     { to: '/pesquisa-satisfacao', label: 'Pesquisa', icon: 'fas fa-star' },
@@ -74,8 +75,17 @@ function Navbar() {
             <div className="navbar-nav ms-auto">
               {navLinks.map((link) =>
                 link.external ? (
-                  <a key={link.to} href={link.to} target="_blank" rel="noopener noreferrer" className="nav-link" title="Resultados Online">
+                  <a
+                    key={link.to}
+                    href={link.to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`nav-link ${link.highlight ? 'nav-link-observatorio' : ''}`}
+                    title={link.label}
+                  >
+                    {link.highlight && <i className={`${link.icon} me-1`}></i>}
                     {link.label}
+                    {link.highlight && <span className="nav-badge">2025</span>}
                   </a>
                 ) : (
                   <Link key={link.to} to={link.to} className={`nav-link ${isActive(link.to)}`}>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import '../styles/Exames.css'
 import '../styles/Carousel.css'
 import '../styles/GuiaPaciente.css'
+import '../styles/Observatorio.css'
 
 function Home() {
   useEffect(() => {
@@ -47,13 +48,44 @@ function Home() {
                     <div className="col-lg-8 text-start">
                       <h2 className="display-3 text-white mb-4 animated slideInLeft">Relatório de Sustentabilidade 2024</h2>
                       <p className="fs-4 text-white mb-4 animated slideInLeft">Conheça nossas iniciativas e compromissos com a sustentabilidade</p>
-                      <a 
-                        href="https://observatoriohsfa.my.canva.site/relatorio-sustentabilidade-2024" 
-                        className="btn btn-light py-3 px-5 animated slideInLeft" 
+                      <a
+                        href="https://observatoriohsfa.my.canva.site/relatorio-sustentabilidade-2024"
+                        className="btn btn-light py-3 px-5 animated slideInLeft"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         Acessar Relatório
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Terceiro Slide - Observatorio HSFA 2025 */}
+            <div className="carousel-item">
+              <div className="observatorio-slide w-100">
+                <div className="observatorio-slide-bg"></div>
+                <div className="container h-100 position-relative">
+                  <div className="row h-100 align-items-center">
+                    <div className="col-lg-8 text-start">
+                      <span className="observatorio-slide-badge animated slideInLeft">
+                        <i className="fas fa-chart-line me-2"></i>NOVIDADE 2025
+                      </span>
+                      <h2 className="observatorio-slide-title animated slideInLeft">
+                        Observatório <span className="observatorio-slide-year">HSFA 2025</span>
+                      </h2>
+                      <p className="observatorio-slide-text animated slideInLeft">
+                        Perfil epidemiológico, indicadores estratégicos e <strong>57 anos cuidando de vidas</strong> em Goiás. Transparência e dados em tempo real.
+                      </p>
+                      <a
+                        href="https://observatorio.hsfasaude.com.br/"
+                        className="observatorio-slide-btn animated slideInLeft"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fas fa-rocket me-2"></i>Explorar Observatório
+                        <i className="fas fa-arrow-right ms-2"></i>
                       </a>
                     </div>
                   </div>
@@ -74,6 +106,124 @@ function Home() {
         </div>
       </div>
       {/* Carousel End */}
+
+      {/* Observatorio HSFA 2025 Start */}
+      <section className="observatorio-section">
+        <div className="observatorio-bg-pattern"></div>
+        <div className="container-xxl position-relative">
+          <div className="container">
+            <div className="row g-5 align-items-center">
+              <div className="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <div className="observatorio-content">
+                  <span className="observatorio-badge">
+                    <span className="observatorio-pulse"></span>
+                    <i className="fas fa-chart-line me-2"></i>NOVO · 2025
+                  </span>
+                  <h2 className="observatorio-title">
+                    Observatório <span className="observatorio-title-accent">HSFA</span>
+                  </h2>
+                  <p className="observatorio-subtitle">
+                    Perfil epidemiológico e indicadores estratégicos
+                  </p>
+                  <p className="observatorio-description">
+                    Conheça em detalhes os números, a história e o impacto do <strong>Hospital São Francisco de Assis</strong>. Dados em tempo real, transparência institucional e a jornada de uma instituição que faz a diferença em Goiás.
+                  </p>
+                  <div className="observatorio-cta-wrapper">
+                    <a
+                      className="observatorio-cta-primary"
+                      href="https://observatorio.hsfasaude.com.br/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fas fa-rocket me-2"></i>
+                      Acessar Observatório
+                      <i className="fas fa-arrow-right ms-2"></i>
+                    </a>
+                    <div className="observatorio-cta-hint">
+                      <i className="fas fa-external-link-alt me-1"></i>
+                      observatorio.hsfasaude.com.br
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                <div className="observatorio-card">
+                  <div className="observatorio-card-header">
+                    <div className="observatorio-card-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <div className="observatorio-card-url">
+                      <i className="fas fa-lock"></i>
+                      observatorio.hsfasaude.com.br
+                    </div>
+                  </div>
+
+                  <div className="observatorio-card-body">
+                    <div className="observatorio-hero">
+                      <div className="observatorio-hero-number">
+                        <span className="observatorio-counter">57</span>
+                        <small>ANOS</small>
+                      </div>
+                      <div className="observatorio-hero-text">
+                        cuidando de vidas em <strong>Goiás</strong><br />
+                        <span className="observatorio-hero-period">de 1919 a 2025</span>
+                      </div>
+                    </div>
+
+                    <div className="observatorio-stats">
+                      <div className="observatorio-stat">
+                        <i className="fas fa-procedures observatorio-stat-icon"></i>
+                        <div>
+                          <div className="observatorio-stat-label">Pronto-Socorro</div>
+                          <div className="observatorio-stat-value">24h · 365 dias</div>
+                        </div>
+                      </div>
+                      <div className="observatorio-stat">
+                        <i className="fas fa-heartbeat observatorio-stat-icon"></i>
+                        <div>
+                          <div className="observatorio-stat-label">UTI · Hemodinâmica</div>
+                          <div className="observatorio-stat-value">Alta complexidade</div>
+                        </div>
+                      </div>
+                      <div className="observatorio-stat">
+                        <i className="fas fa-x-ray observatorio-stat-icon"></i>
+                        <div>
+                          <div className="observatorio-stat-label">Diagnóstico por Imagem</div>
+                          <div className="observatorio-stat-value">Centro de excelência</div>
+                        </div>
+                      </div>
+                      <div className="observatorio-stat">
+                        <i className="fas fa-leaf observatorio-stat-icon"></i>
+                        <div>
+                          <div className="observatorio-stat-label">Sustentabilidade ESG</div>
+                          <div className="observatorio-stat-value">Compromisso institucional</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="observatorio-tags">
+                      <span>Pronto-Socorro</span>
+                      <span>UTI</span>
+                      <span>Centro Cirúrgico</span>
+                      <span>Hemodinâmica</span>
+                      <span>SCIH</span>
+                      <span>Nutrição</span>
+                      <span>Farmácia</span>
+                      <span>Nefrologia</span>
+                      <span>CIHDOT</span>
+                      <span>Gestão de Pessoas</span>
+                      <span>ESG</span>
+                      <span>TI</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Observatorio HSFA 2025 End */}
 
       {/* Relatório de Sustentabilidade Start */}
       <div className="container-xxl py-5">
