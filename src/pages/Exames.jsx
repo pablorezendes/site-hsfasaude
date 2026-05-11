@@ -33,6 +33,7 @@ function Exames() {
         { id: 39, imagem: 'ergometrico.jpg', titulo: 'Teste Ergométrico' },
         { id: 40, imagem: 'hemodinamica.jpg', titulo: 'Hemodinâmica' },
         { id: 41, imagem: 'holter.jpg', titulo: 'Holter' },
+        { id: 42, imagem: 'mapa.jpg', titulo: 'MAPA' },
       ])
       setLoading(false)
     } catch (error) {

@@ -32,6 +32,7 @@ function VerExame() {
         39: { titulo: 'Teste Ergométrico', descricao: 'O Teste Ergométrico avalia a resposta do coração ao esforço físico, sendo indicado para diagnóstico de doenças cardiovasculares, avaliação de aptidão física e acompanhamento de tratamentos.', imagem: 'ergometrico.jpg' },
         40: { titulo: 'Hemodinâmica', descricao: 'O setor de Hemodinâmica realiza procedimentos diagnósticos e terapêuticos minimamente invasivos do sistema cardiovascular, como cateterismo, angioplastia e implante de stents.', imagem: 'hemodinamica.jpg' },
         41: { titulo: 'Holter', descricao: 'O Holter é um exame que monitora continuamente o ritmo cardíaco por 24 horas ou mais, sendo indicado para investigação de palpitações, desmaios e arritmias intermitentes.', imagem: 'holter.jpg' },
+        42: { titulo: 'MAPA', descricao: 'A MAPA (Monitorização Ambulatorial da Pressão Arterial) é um exame que mede a pressão arterial em diferentes momentos durante 24 horas, sendo essencial para o diagnóstico preciso de hipertensão e avaliação da eficácia do tratamento.', imagem: 'mapa.jpg' },
       }
       
       setExame(examesData[id] || examesData[29])
