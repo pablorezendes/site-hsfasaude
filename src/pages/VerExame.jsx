@@ -26,6 +26,12 @@ function VerExame() {
         22: { titulo: 'Ecocardiograma', descricao: 'O Ecocardiograma é um exame de ultrassom do coração que avalia a estrutura e função cardíaca, sendo essencial para o diagnóstico de doenças cardíacas.', imagem: 'ecocardio.jpg' },
         30: { titulo: 'Ultrassom Geral', descricao: 'O Ultrassom Geral utiliza ondas sonoras de alta frequência para criar imagens de órgãos internos, sendo um exame seguro e não invasivo.', imagem: 'ultrassom_geral.jpg' },
         35: { titulo: 'Densitometria Óssea', descricao: 'A Densitometria Óssea é o exame padrão para avaliar a densidade mineral óssea e diagnosticar osteoporose e outras condições relacionadas aos ossos.', imagem: 'densitometria.jpg' },
+        36: { titulo: 'Ultrassom Vascular (Doppler)', descricao: 'O Ultrassom Vascular com Doppler avalia o fluxo sanguíneo em artérias e veias, sendo fundamental para o diagnóstico de tromboses, varizes, aneurismas e outras alterações vasculares.', imagem: 'doppler.jpg' },
+        37: { titulo: 'Eletrocardiograma', descricao: 'O Eletrocardiograma é um exame rápido e indolor que registra a atividade elétrica do coração, auxiliando no diagnóstico de arritmias, isquemias e outras doenças cardíacas.', imagem: 'eletrocardiograma.jpg' },
+        38: { titulo: 'Vídeo Endoscopia', descricao: 'A Vídeo Endoscopia Digestiva Alta permite avaliar o esôfago, estômago e duodeno por meio de um aparelho com câmera, sendo essencial para o diagnóstico de gastrites, úlceras e outras alterações do trato digestivo.', imagem: 'endoscopia.jpg' },
+        39: { titulo: 'Teste Ergométrico', descricao: 'O Teste Ergométrico avalia a resposta do coração ao esforço físico, sendo indicado para diagnóstico de doenças cardiovasculares, avaliação de aptidão física e acompanhamento de tratamentos.', imagem: 'ergometrico.jpg' },
+        40: { titulo: 'Hemodinâmica', descricao: 'O setor de Hemodinâmica realiza procedimentos diagnósticos e terapêuticos minimamente invasivos do sistema cardiovascular, como cateterismo, angioplastia e implante de stents.', imagem: 'hemodinamica.jpg' },
+        41: { titulo: 'Holter', descricao: 'O Holter é um exame que monitora continuamente o ritmo cardíaco por 24 horas ou mais, sendo indicado para investigação de palpitações, desmaios e arritmias intermitentes.', imagem: 'holter.jpg' },
       }
       
       setExame(examesData[id] || examesData[29])

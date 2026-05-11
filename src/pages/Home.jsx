@@ -301,6 +301,12 @@ function Home() {
               { id: 22, imagem: 'ecocardio.jpg', titulo: 'Ecocardiograma' },
               { id: 30, imagem: 'ultrassom_geral.jpg', titulo: 'Ultrassom Geral' },
               { id: 35, imagem: 'densitometria.jpg', titulo: 'Densitometria Óssea' },
+              { id: 36, imagem: 'doppler.jpg', titulo: 'Ultrassom Vascular (Doppler)' },
+              { id: 37, imagem: 'eletrocardiograma.jpg', titulo: 'Eletrocardiograma' },
+              { id: 38, imagem: 'endoscopia.jpg', titulo: 'Vídeo Endoscopia' },
+              { id: 39, imagem: 'ergometrico.jpg', titulo: 'Teste Ergométrico' },
+              { id: 40, imagem: 'hemodinamica.jpg', titulo: 'Hemodinâmica' },
+              { id: 41, imagem: 'holter.jpg', titulo: 'Holter' },
             ].map((exame, index) => (
               <div 
                 key={exame.id} 
