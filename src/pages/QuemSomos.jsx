@@ -116,7 +116,7 @@ function QuemSomos() {
                         NEGÓCIO
                       </h4>
                       <p className="mb-0" style={{ fontSize: '1.05rem', lineHeight: '1.7', color: '#555' }}>
-                        Prestar assistência médico hospitalar.
+                        Prestar assistência médico-hospitalar.
                       </p>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ function QuemSomos() {
                         MISSÃO
                       </h4>
                       <p className="mb-0" style={{ fontSize: '1.05rem', lineHeight: '1.7', color: '#555' }}>
-                        Cuidar de vidas por meio de um atendimento médico-hospitalar humanizado, com foco na excelência e na sustentabilidade.
+                        Cuidar de vidas por meio de um atendimento médico-hospitalar humanizado, com foco na excelência e na Sustentabilidade.
                       </p>
                     </div>
                   </div>
@@ -208,7 +208,7 @@ function QuemSomos() {
                         VISÃO
                       </h4>
                       <p className="mb-0" style={{ fontSize: '1.05rem', lineHeight: '1.7', color: '#555' }}>
-                        Ser reconhecido nacionalmente pela excelência no atendimento médico-hospitalar, através da qualidade, da gestão e do crescimento continuo.
+                        Consolidar-se como referência nacional em excelência no atendimento médico-hospitalar, com foco em segurança assistencial, inovação, sustentabilidade e melhoria contínua dos processos.
                       </p>
                     </div>
                   </div>
